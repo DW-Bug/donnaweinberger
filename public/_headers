@@ -16,3 +16,6 @@
 
 /og-image.png
   Cache-Control: public, max-age=604800
+
+/portrait/*
+  Cache-Control: public, max-age=2592000

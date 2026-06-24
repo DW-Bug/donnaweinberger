@@ -18,6 +18,8 @@ const {
 
 const canonical = new URL(path, SITE.url).href;
 const ogImage = new URL(SITE.ogImage, SITE.url).href;
+const portraitImage = new URL("/portrait/donna-weinberger.jpg", SITE.url).href;
+const isHome = path === "" || path === "/";
 const fullTitle =
   path === "" || path === "/"
     ? `${SITE.name} — ${SITE.tagline}`
@@ -46,7 +48,7 @@ const jsonLd = {
       url: SITE.url,
       jobTitle: "Founder & Chief Executive Officer",
       description: SITE.shortDescription,
-      image: ogImage,
+      image: portraitImage,
       knowsAbout: [
         "Behavioral Health",
         "Addiction Recovery",
@@ -109,6 +111,19 @@ const jsonLd = {
 <!-- Icons -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/favicon.svg" />
+
+{
+  isHome && (
+    <link
+      rel="preload"
+      as="image"
+      href="/portrait/donna-560.webp"
+      type="image/webp"
+      imagesrcset="/portrait/donna-400.webp 400w, /portrait/donna-560.webp 560w, /portrait/donna-800.webp 800w, /portrait/donna-1120.webp 1120w"
+      imagesizes="(max-width: 760px) 70vw, (max-width: 1100px) 40vw, 440px"
+    />
+  )
+}
 
 <!-- Fonts: preconnect + a single combined request -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />

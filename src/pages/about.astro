@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
+import Portrait from "../components/Portrait.astro";
 import { DOMAINS } from "../consts";
 
 const principles = [
@@ -35,7 +36,20 @@ const principles = [
   />
 
   <section class="section--tight">
-    <div class="container narrow">
+    <div class="container about-bio">
+      <figure class="about-figure" data-reveal>
+        <div class="about-portrait-wrap">
+          <span class="about-portrait-bar" aria-hidden="true"></span>
+          <Portrait
+            class="about-portrait"
+            alt="Portrait of Donna Weinberger, founder and executive leader"
+            loading="lazy"
+            sizes="(max-width: 860px) 60vw, 360px"
+          />
+        </div>
+        <figcaption>Donna Weinberger — Founder, Executive Leader, Entrepreneur &amp; Advocate</figcaption>
+      </figure>
+
       <div class="prose" data-reveal>
         <p>
           Donna's throughline isn't an industry — it's a stance. They find the
@@ -111,10 +125,60 @@ const principles = [
 </Layout>
 
 <style>
+  .about-bio {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .about-figure {
+    margin: 0;
+    position: sticky;
+    top: 96px;
+  }
+  .about-portrait-wrap {
+    position: relative;
+    border-radius: var(--radius);
+    box-shadow: 0 22px 54px -30px rgba(21, 23, 28, 0.5);
+  }
+  .about-portrait-bar {
+    position: absolute;
+    left: -10px;
+    bottom: 24px;
+    width: 8px;
+    height: 40%;
+    border-radius: 8px;
+    background: var(--spectrum-vert);
+    z-index: 2;
+  }
+  .about-figure :global(.about-portrait img) {
+    border: 1px solid var(--line);
+  }
+  .about-figure figcaption {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate);
+    line-height: 1.5;
+  }
   .prose p {
     font-size: 1.15rem;
     line-height: 1.7;
     color: var(--ink-soft);
+  }
+  .prose p:first-child {
+    margin-top: 0;
+  }
+  @media (max-width: 860px) {
+    .about-bio {
+      grid-template-columns: 1fr;
+    }
+    .about-figure {
+      position: static;
+      max-width: 300px;
+    }
   }
   .block-head {
     max-width: 40rem;

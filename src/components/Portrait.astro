@@ -1,0 +1,49 @@
+---
+// Responsive founder portrait. Serves WebP with a JPEG fallback, with
+// width/height set to reserve space (no layout shift). Optimized derivatives
+// live in /public/portrait.
+interface Props {
+  alt?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+  sizes?: string;
+  class?: string;
+}
+const {
+  alt = "Donna Weinberger, founder and executive leader",
+  loading = "lazy",
+  fetchpriority = "auto",
+  sizes = "(max-width: 760px) 80vw, 480px",
+  class: className = "",
+} = Astro.props;
+---
+
+<picture class:list={["portrait", className]}>
+  <source
+    type="image/webp"
+    srcset="/portrait/donna-400.webp 400w, /portrait/donna-560.webp 560w, /portrait/donna-800.webp 800w, /portrait/donna-1120.webp 1120w"
+    sizes={sizes}
+  />
+  <img
+    src="/portrait/donna-800.jpg"
+    width="800"
+    height="1200"
+    alt={alt}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding="async"
+  />
+</picture>
+
+<style>
+  .portrait {
+    display: block;
+  }
+  .portrait img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+    object-fit: cover;
+  }
+</style>
