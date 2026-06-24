@@ -15,6 +15,12 @@ export type Milestone = {
 export const MILESTONES: Milestone[] = [
   {
     period: "—",
+    title: "A foundation in technology and design",
+    detail:
+      "Founded TownTek and Webstetic — earlier ventures spanning web development, design, branding, animated digital invitations (evites), and printing that built a hands-on foundation in digital media.",
+  },
+  {
+    period: "—",
     title: "Building affirming behavioral health",
     detail:
       "Founded Inspire Recovery and stepped into the CEO role, establishing LGBTQ+ affirming treatment as the foundation of a growing body of work in recovery and care.",
@@ -39,14 +45,8 @@ export const MILESTONES: Milestone[] = [
   },
   {
     period: "—",
-    title: "Founding across technology",
+    title: "A new venture in wellness discovery",
     detail:
-      "Founded TownTek and Webstetic, applying operational and digital craft to the problems mission-driven organizations actually face.",
-  },
-  {
-    period: "—",
-    title: "Toward AI-enabled innovation",
-    detail:
-      "Founded SpanScout, extending the work into AI-enabled tooling — exploring how intelligent systems can multiply the impact of small, focused teams.",
+      "Founded SpanScout, a wellness discovery platform and provider directory helping people find healthspan, longevity, functional medicine, hormone, GLP-1 / weight loss, and related wellness providers by category and location.",
   },
 ];

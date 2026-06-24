@@ -17,7 +17,7 @@ export type Venture = {
     | "AI-Enabled Innovation";
   description: string;
   url?: string; // optional external link
-  status?: "Active" | "Ongoing"; // optional badge
+  status?: "Active" | "Ongoing" | "Past"; // optional badge
 };
 
 export const VENTURES: Venture[] = [
@@ -55,26 +55,26 @@ export const VENTURES: Venture[] = [
   },
   {
     name: "TownTek",
-    role: "Founder",
+    role: "Founder (past venture)",
     category: "Technology",
     description:
-      "A technology venture applying modern tooling to real operational problems — turning manual, fragmented workflows into systems that scale.",
-    status: "Active",
+      "An earlier founder-led venture combining digital web services, design, animated digital invitations (evites), and printing — part of Donna's foundation in technology and digital media.",
+    status: "Past",
   },
   {
     name: "Webstetic",
-    role: "Founder",
+    role: "Founder (past venture)",
     category: "Technology",
     description:
-      "A digital and web technology studio helping mission-driven organizations show up online with clarity, performance, and craft.",
-    status: "Active",
+      "A past web and design venture focused on digital presence, web development, branding, and creative services — reflecting deep hands-on roots in digital craft.",
+    status: "Past",
   },
   {
     name: "SpanScout",
     role: "Founder",
     category: "AI-Enabled Innovation",
     description:
-      "An AI-enabled venture exploring how intelligent tooling can extend the reach of small teams and surface insight from complex information.",
+      "A wellness discovery platform and provider directory that helps people find healthspan, longevity, functional medicine, hormone, GLP-1 / weight loss, and related wellness providers by category and location.",
     status: "Active",
   },
   {

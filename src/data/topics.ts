@@ -80,7 +80,7 @@ export const INITIATIVES: Initiative[] = [
     name: "SpanScout",
     category: "AI-Enabled Innovation",
     description:
-      "Developing AI-enabled tooling aimed at giving small, focused teams outsized reach and insight.",
+      "Building a wellness discovery platform and provider directory that helps people find healthspan, longevity, functional medicine, hormone, GLP-1 / weight loss, and related wellness providers by category and location.",
   },
   {
     name: "Pride on the Block",

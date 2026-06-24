@@ -16,7 +16,7 @@ export const SITE = {
   // Optional — fill in real handles to power JSON-LD `sameAs` and the footer.
   // Leave a value as an empty string to hide that link.
   social: {
-    linkedin: "", // e.g. "https://www.linkedin.com/in/donnaweinberger"
+    linkedin: "https://www.linkedin.com/in/donnaweinberger/",
     x: "",
     instagram: "",
   },
