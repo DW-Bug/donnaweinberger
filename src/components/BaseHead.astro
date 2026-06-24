@@ -124,3 +124,24 @@ const jsonLd = {
   set:html={JSON.stringify(jsonLd)}
   is:inline
 />
+
+<!-- Google Analytics 4 (gtag.js) — loaded globally on every page via BaseHead -->
+{
+  SITE.gaMeasurementId && (
+    <>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`}
+        is:inline
+      />
+      <script is:inline define:vars={{ gaId: SITE.gaMeasurementId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", gaId);
+      </script>
+    </>
+  )
+}

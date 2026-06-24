@@ -23,6 +23,8 @@ export const SITE = {
   // Contact endpoint handled by the Cloudflare Pages Function.
   contactEndpoint: "/api/contact",
   contactEmail: "", // intentionally blank — the address is never shown publicly; the form posts to contactEndpoint
+  // Google Analytics 4 Measurement ID. Leave blank to disable analytics.
+  gaMeasurementId: "G-M97CSM7WXV",
 };
 
 export const NAV = [
