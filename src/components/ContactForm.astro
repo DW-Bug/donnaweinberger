@@ -1,0 +1,201 @@
+---
+import { SITE } from "../consts";
+---
+
+<form id="contact-form" class="contact-form card" novalidate>
+  <div class="field-row">
+    <div class="field">
+      <label for="cf-name">Name</label>
+      <input id="cf-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" autocomplete="email" required />
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label for="cf-org">Organization <span class="opt">(optional)</span></label>
+      <input id="cf-org" name="organization" type="text" autocomplete="organization" />
+    </div>
+    <div class="field">
+      <label for="cf-reason">Reason for reaching out</label>
+      <select id="cf-reason" name="reason" required>
+        <option value="" disabled selected>Choose one…</option>
+        <option>Speaking engagement</option>
+        <option>Advisory or consulting</option>
+        <option>Press or media</option>
+        <option>Partnership</option>
+        <option>Something else</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="cf-message">Message</label>
+    <textarea id="cf-message" name="message" rows="5" required></textarea>
+  </div>
+
+  <!-- Honeypot: hidden from people, tempting to bots. -->
+  <div class="hp" aria-hidden="true">
+    <label for="cf-company">Company</label>
+    <input id="cf-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="form-footer">
+    <button type="submit" class="btn btn--accent">Send message</button>
+    {
+      SITE.contactEmail && (
+        <p class="form-alt">
+          Prefer email? <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+        </p>
+      )
+    }
+  </div>
+
+  <p id="cf-status" class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .opt {
+    font-weight: 420;
+    color: var(--slate-light);
+  }
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1.5px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 0.85rem;
+    width: 100%;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: 0 0 0 3px rgba(122, 63, 176, 0.16);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-footer {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .form-alt {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--slate);
+  }
+  .form-status {
+    margin: 0;
+    font-size: 0.95rem;
+    min-height: 1.2em;
+  }
+  .form-status.is-error {
+    color: #b3261e;
+  }
+  .form-status.is-ok {
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+  @media (max-width: 560px) {
+    .field-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script define:vars={{ endpoint: SITE.contactEndpoint }}>
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("cf-status");
+
+  function setStatus(msg, kind) {
+    status.textContent = msg;
+    status.classList.remove("is-error", "is-ok");
+    if (kind) status.classList.add(kind);
+  }
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      setStatus("Please complete the required fields.", "is-error");
+      form.reportValidity();
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    setStatus("");
+
+    try {
+      const data = Object.fromEntries(new FormData(form).entries());
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (res.ok && body.ok) {
+        form.reset();
+        setStatus(
+          "Thank you — your message is on its way. You'll hear back soon.",
+          "is-ok"
+        );
+      } else {
+        setStatus(
+          body.error || "Something went wrong. Please try again or email directly.",
+          "is-error"
+        );
+      }
+    } catch {
+      setStatus(
+        "Couldn't reach the server. Please try again in a moment.",
+        "is-error"
+      );
+    } finally {
+      btn.disabled = false;
+      btn.textContent = original;
+    }
+  });
+</script>

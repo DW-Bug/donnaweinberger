@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const reasons = [
+  { label: "Speaking", note: "Keynotes, panels, fireside chats" },
+  { label: "Advisory", note: "Founders, boards, leadership teams" },
+  { label: "Press & media", note: "Interviews and commentary" },
+  { label: "Partnership", note: "Care, community, and technology" },
+];
+---
+
+<Layout
+  title="Contact"
+  path="/contact"
+  description="Get in touch with Donna Weinberger for speaking, advisory, press, or partnership inquiries."
+>
+  <PageHeader
+    eyebrow="Contact"
+    title="Let's talk."
+    intro="Speaking, advisory, press, or partnership — send a note and Donna's team will follow up."
+  />
+
+  <section class="section--tight">
+    <div class="container contact-layout">
+      <aside class="contact-aside" data-reveal>
+        <p class="eyebrow">What people reach out about</p>
+        <ul class="reason-list">
+          {
+            reasons.map((r) => (
+              <li>
+                <span class="reason-label">{r.label}</span>
+                <span class="reason-note">{r.note}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <hr class="spectrum-rule" />
+        <p class="aside-note">
+          Prefer to keep it brief? A few sentences about what you're working on
+          and how you'd like to collaborate is plenty to get started.
+        </p>
+      </aside>
+
+      <div class="contact-main" data-reveal>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+    padding-bottom: clamp(3rem, 7vw, 5rem);
+  }
+  .contact-aside .spectrum-rule {
+    margin: 1.75rem 0;
+  }
+  .reason-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .reason-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .reason-label {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--ink);
+  }
+  .reason-note {
+    color: var(--slate);
+    font-size: 0.95rem;
+  }
+  .aside-note {
+    color: var(--slate);
+    font-size: 0.98rem;
+    margin: 0;
+  }
+  @media (max-width: 820px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

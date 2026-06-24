@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import OrganizationsList from "../components/OrganizationsList.astro";
+import { VENTURES } from "../data/ventures";
+import { DOMAINS } from "../consts";
+
+// Count ventures per domain for the summary band.
+const counts = DOMAINS.map((d) => ({
+  domain: d,
+  n: VENTURES.filter((v) => v.category === d).length,
+})).filter((c) => c.n > 0);
+---
+
+<Layout
+  title="Organizations Founded"
+  path="/organizations"
+  description="The organizations and ventures founded by Donna Weinberger across behavioral health, nonprofit leadership, technology, community, and AI-enabled innovation."
+>
+  <PageHeader
+    eyebrow="Organizations founded"
+    title="What she's built, in one place."
+    intro="Eight organizations across care, advocacy, and technology. Each one was started to answer a specific need that existing systems weren't meeting."
+  />
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="domain-counts" data-reveal>
+        {
+          counts.map((c) => (
+            <div class="domain-count">
+              <span class="domain-count-n">{c.n}</span>
+              <span class="domain-count-label">{c.domain}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <OrganizationsList showIntro={false} />
+
+  <section class="section section--dark">
+    <div class="container narrow center">
+      <p class="eyebrow" data-reveal>The pattern</p>
+      <h2 data-reveal>Different fields. The same way of working.</h2>
+      <p class="lede closing-lede" data-reveal>
+        Behavioral health, advocacy, technology — the subject changes, the
+        method doesn't. Find who's being underserved, build something affirming
+        and durable, and keep going.
+      </p>
+      <a href="/contact" class="btn btn--accent" data-reveal>Start a conversation</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .domain-counts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    padding: 1.5rem 0;
+    border-block: 1px solid var(--line);
+  }
+  .domain-count {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .domain-count-n {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--accent-ink);
+  }
+  .domain-count-label {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .center {
+    text-align: center;
+  }
+  .center .eyebrow {
+    justify-content: center;
+  }
+  .closing-lede {
+    color: #cfcbc2;
+    margin-bottom: 2rem;
+  }
+</style>

@@ -1,0 +1,6 @@
+# Cloudflare Pages redirects.
+# Add custom redirects here as needed, e.g. consolidating old URLs:
+#   /old-path  /new-path  301
+#
+# Apex vs www is best handled with a redirect rule in the Cloudflare dashboard,
+# but you can also force it here once your custom domain is attached.

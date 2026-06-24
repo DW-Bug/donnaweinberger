@@ -1,0 +1,148 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { SPEAKING_TOPICS, ADVISORY_AREAS } from "../data/topics";
+---
+
+<Layout
+  title="Speaking & Advisory"
+  path="/speaking"
+  description="Donna Weinberger speaks and advises on affirming behavioral health, nonprofit leadership, founding across domains, LGBTQ+ health equity, and AI for mission-driven teams."
+>
+  <PageHeader
+    eyebrow="Speaking & advisory"
+    title="Perspective from someone who's actually built it."
+    intro="Donna speaks to audiences and advises leaders on what it takes to start affirming organizations, lead across very different fields, and bring new technology to work that's fundamentally about people."
+  />
+
+  <section class="section--tight">
+    <div class="container">
+      <hr class="spectrum-rule" data-reveal />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="topics-heading">
+    <div class="container">
+      <header class="block-head" data-reveal>
+        <p class="eyebrow">Speaking topics</p>
+        <h2 id="topics-heading">What she's invited to talk about</h2>
+        <p class="lede">
+          Keynotes, panels, and fireside conversations — tailored to your
+          audience, grounded in real operating experience.
+        </p>
+      </header>
+
+      <div class="topic-grid">
+        {
+          SPEAKING_TOPICS.map((t, i) => (
+            <article class="topic card" data-reveal>
+              <span class="topic-num">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{t.title}</h3>
+              <p>{t.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark" aria-labelledby="advisory-heading">
+    <div class="container">
+      <header class="block-head" data-reveal>
+        <p class="eyebrow">Advisory</p>
+        <h2 id="advisory-heading">Where she advises</h2>
+        <p class="lede" style="color:#cfcbc2">
+          Selective, hands-on advisory work with founders, boards, and
+          leadership teams across the fields she's operated in.
+        </p>
+      </header>
+
+      <div class="advisory-grid">
+        {
+          ADVISORY_AREAS.map((a) => (
+            <article class="advisory" data-reveal>
+              <h3>{a.title}</h3>
+              <p>{a.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow center">
+      <p class="eyebrow" data-reveal>Booking</p>
+      <h2 data-reveal>Have a stage or a board seat in mind?</h2>
+      <p class="lede" data-reveal>
+        Share the audience, the format, and the date — Donna's team will follow
+        up with availability and fit.
+      </p>
+      <a href="/contact" class="btn btn--accent" data-reveal>Request Donna</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .block-head {
+    max-width: 42rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .topic {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .topic-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--violet);
+  }
+  .topic h3 {
+    margin: 0.3rem 0 0.2rem;
+    font-size: 1.25rem;
+  }
+  .topic p {
+    margin: 0;
+    color: var(--slate);
+  }
+  .advisory-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .advisory {
+    padding-top: 1.1rem;
+    border-top: 2px solid transparent;
+    border-image: var(--spectrum) 1;
+  }
+  .advisory h3 {
+    margin: 0 0 0.4rem;
+  }
+  .advisory p {
+    margin: 0;
+    color: #b7b3aa;
+  }
+  .center {
+    text-align: center;
+  }
+  .center .eyebrow {
+    justify-content: center;
+  }
+  @media (max-width: 900px) {
+    .topic-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .topic-grid,
+    .advisory-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

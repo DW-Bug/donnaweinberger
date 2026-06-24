@@ -1,0 +1,22 @@
+{
+  "name": "donna-weinberger-site",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal brand website for Donna Weinberger — Founder, Executive Leader, Entrepreneur, Advocate.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "pages:dev": "wrangler pages dev ./dist",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.4.0",
+    "@astrojs/sitemap": "^3.2.1"
+  },
+  "devDependencies": {
+    "wrangler": "^3.114.0"
+  }
+}

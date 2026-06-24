@@ -1,0 +1,177 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { DOMAINS } from "../consts";
+
+const principles = [
+  {
+    title: "People first, always",
+    body: "Every venture starts from a person who was being underserved, turned away, or unseen. The org is just the most durable way to help them.",
+  },
+  {
+    title: "Affirming by design",
+    body: "Care and community work best when people don't have to translate themselves to be helped. Affirming isn't a feature — it's the foundation.",
+  },
+  {
+    title: "Build to last",
+    body: "Visibility matters, but institutions outlast moments. The goal is always something that keeps working after the launch energy fades.",
+  },
+  {
+    title: "Use the new tools well",
+    body: "Technology and AI are leverage, not theater. The question is always whether they let a small, focused team do more for the people they serve.",
+  },
+];
+---
+
+<Layout
+  title="About"
+  path="/about"
+  description="The story of Donna Weinberger — a serial founder and executive leader working across behavioral health, nonprofit advocacy, technology, and AI-enabled innovation."
+>
+  <PageHeader
+    eyebrow="About Donna"
+    title="A builder who keeps starting things that needed to exist."
+    intro="Donna Weinberger is a founder, executive leader, entrepreneur, and advocate. Her work spans five fields that rarely sit at the same table — and she's spent a career proving they belong there."
+  />
+
+  <section class="section--tight">
+    <div class="container narrow">
+      <div class="prose" data-reveal>
+        <p>
+          Donna's throughline isn't an industry — it's a stance. She finds the
+          place where people are being failed by the systems meant to serve
+          them, and she builds something better in its place. That instinct has
+          taken her from the deeply human work of recovery and behavioral
+          health to the front lines of LGBTQ+ advocacy, and on into technology
+          and AI-enabled innovation.
+        </p>
+        <p>
+          As <strong>Founder &amp; CEO of Inspire Recovery</strong>, she built
+          an addiction treatment program on a simple, radical premise: people
+          recover best when they're affirmed for exactly who they are. That
+          conviction reappears in everything that followed — the detox programs
+          designed to lower the threshold to care, the nonprofit dedicated to
+          the transgender community, the street-level initiative that turns
+          public space into belonging.
+        </p>
+        <p>
+          Her advocacy hasn't gone unnoticed. Donna is a recipient of the
+          <strong>Equality Florida Voice for Equality Award</strong>,
+          recognizing sustained leadership and impact for the LGBTQ+ community.
+        </p>
+        <p>
+          And she keeps building. Across <strong>TownTek</strong>,
+          <strong>Webstetic</strong>, and <strong>SpanScout</strong>, she's
+          carried the same operating philosophy into technology — most recently
+          into AI-enabled tooling aimed at giving small, mission-driven teams
+          outsized reach. Different rooms, same question every time: what do the
+          people here actually need, and what's the most durable way to give it
+          to them?
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <header class="block-head" data-reveal>
+        <p class="eyebrow">How she works</p>
+        <h2>Four principles behind every venture</h2>
+      </header>
+      <div class="principles">
+        {
+          principles.map((p, i) => (
+            <article class="principle" data-reveal>
+              <span class="principle-num">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Where she leads</p>
+      <h2 data-reveal>Five domains, one operator</h2>
+      <ul class="domain-list" data-reveal>
+        {DOMAINS.map((d) => <li>{d}</li>)}
+      </ul>
+      <div class="about-cta" data-reveal>
+        <a href="/organizations" class="btn btn--accent">See the organizations</a>
+        <a href="/contact" class="btn btn--ghost btn--on-dark">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prose p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .block-head {
+    max-width: 40rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .principle {
+    border-top: 2px solid transparent;
+    border-image: var(--spectrum) 1;
+    padding-top: 1.1rem;
+  }
+  .principle-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--violet);
+  }
+  .principle h3 {
+    margin: 0.5rem 0 0.5rem;
+  }
+  .principle p {
+    margin: 0;
+    color: var(--slate);
+  }
+  .domain-list {
+    list-style: none;
+    margin: 1.5rem 0 2.5rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .domain-list li {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    color: #e7e4dd;
+  }
+  .about-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+  .btn--on-dark {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  .btn--on-dark:hover {
+    border-color: #fff;
+  }
+  @media (max-width: 640px) {
+    .principles {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

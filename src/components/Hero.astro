@@ -1,0 +1,143 @@
+---
+import { SITE } from "../consts";
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="eyebrow hero-eyebrow">Founder · Executive · Advocate</p>
+    <h1 class="hero-title">
+      Building care, community,<br />
+      and technology that<br />
+      <span class="hero-accent">lasts</span>.
+    </h1>
+    <p class="lede hero-lede">
+      {SITE.name} is a serial founder and executive leader whose work runs from
+      affirming behavioral health and nonprofit advocacy to technology and
+      AI-enabled innovation — eight organizations, one throughline: people first.
+    </p>
+    <div class="hero-actions">
+      <a href="/organizations" class="btn">See what she's built</a>
+      <a href="/speaking" class="btn btn--ghost">Speaking &amp; advisory</a>
+    </div>
+
+    <ul class="hero-domains" aria-label="Areas of leadership">
+      <li>Behavioral Health</li>
+      <li>Nonprofit Leadership</li>
+      <li>Technology</li>
+      <li>Community</li>
+      <li>AI-Enabled Innovation</li>
+    </ul>
+  </div>
+  <div class="hero-spine" aria-hidden="true"></div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(3.5rem, 9vw, 7rem) clamp(3rem, 7vw, 5.5rem);
+    overflow: hidden;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+  }
+  .hero-eyebrow {
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    margin: 0 0 1.6rem;
+    font-size: clamp(2.7rem, 7.2vw, 5.1rem);
+    font-weight: 480;
+    letter-spacing: -0.02em;
+  }
+  .hero-accent {
+    position: relative;
+    background: var(--spectrum);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+  .hero-lede {
+    max-width: 38rem;
+    margin-bottom: 2.2rem;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+  .hero-domains {
+    list-style: none;
+    margin: 3rem 0 0;
+    padding: 1.4rem 0 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .hero-domains li {
+    position: relative;
+    padding-left: 1rem;
+  }
+  .hero-domains li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background: var(--violet);
+  }
+  .hero-domains li:nth-child(1)::before { background: var(--coral); }
+  .hero-domains li:nth-child(2)::before { background: var(--magenta); }
+  .hero-domains li:nth-child(3)::before { background: var(--violet); }
+  .hero-domains li:nth-child(4)::before { background: #5b46b4; }
+  .hero-domains li:nth-child(5)::before { background: var(--indigo); }
+
+  /* Ambient spectrum spine on the right of the hero */
+  .hero-spine {
+    position: absolute;
+    top: -10%;
+    right: clamp(-120px, -4vw, 0px);
+    width: 46vw;
+    max-width: 560px;
+    height: 130%;
+    background:
+      radial-gradient(
+        120% 80% at 80% 20%,
+        rgba(200, 65, 127, 0.1),
+        transparent 60%
+      ),
+      radial-gradient(
+        100% 90% at 95% 70%,
+        rgba(59, 79, 184, 0.1),
+        transparent 60%
+      );
+    pointer-events: none;
+  }
+  .hero-spine::after {
+    content: "";
+    position: absolute;
+    top: 8%;
+    right: 14%;
+    bottom: 8%;
+    width: 4px;
+    border-radius: 4px;
+    background: var(--spectrum-vert);
+    opacity: 0.85;
+  }
+  @media (max-width: 760px) {
+    .hero-spine {
+      display: none;
+    }
+  }
+</style>

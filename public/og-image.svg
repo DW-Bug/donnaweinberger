@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8624a"/>
+      <stop offset="0.38" stop-color="#c8417f"/>
+      <stop offset="0.7" stop-color="#7a3fb0"/>
+      <stop offset="1" stop-color="#3b4fb8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#c8417f" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#15171c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#15171c"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- spectrum spine -->
+  <rect x="90" y="150" width="12" height="330" rx="6" fill="url(#spectrum)"/>
+
+  <!-- eyebrow -->
+  <text x="140" y="178" font-family="'IBM Plex Mono', monospace" font-size="22" letter-spacing="6" fill="#b7b2c9">FOUNDER · EXECUTIVE · ENTREPRENEUR · ADVOCATE</text>
+
+  <!-- name -->
+  <text x="138" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="104" fill="#fdfcfa">Donna Weinberger</text>
+
+  <!-- supporting line -->
+  <text x="140" y="372" font-family="Arial, 'Helvetica Neue', sans-serif" font-size="34" fill="#cfcbc2">Building care, community, and technology that lasts.</text>
+
+  <!-- domain chips -->
+  <g font-family="'IBM Plex Mono', monospace" font-size="20" fill="#e7e4dd">
+    <text x="140" y="470">Behavioral Health</text>
+    <text x="400" y="470">·</text>
+    <text x="424" y="470">Nonprofit</text>
+    <text x="600" y="470">·</text>
+    <text x="624" y="470">Technology</text>
+    <text x="820" y="470">·</text>
+    <text x="844" y="470">Community</text>
+    <text x="1050" y="470">·</text>
+    <text x="140" y="506">AI-Enabled Innovation</text>
+  </g>
+
+  <!-- domain bottom rule -->
+  <rect x="140" y="528" width="930" height="3" rx="1.5" fill="url(#spectrum)" opacity="0.7"/>
+
+  <text x="140" y="566" font-family="Arial, sans-serif" font-size="20" fill="#8e8a82">donnaweinberger.com</text>
+</svg>

@@ -1,0 +1,9 @@
+name = "donna-weinberger-site"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+# Local development of Pages Functions:
+#   npm run build && npx wrangler pages dev ./dist
+#
+# Production environment variables (RESEND_API_KEY, CONTACT_TO, CONTACT_FROM)
+# should be set in the Cloudflare dashboard, not committed here.

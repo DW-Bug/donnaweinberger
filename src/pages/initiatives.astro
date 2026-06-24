@@ -1,0 +1,109 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { INITIATIVES } from "../data/topics";
+---
+
+<Layout
+  title="Current Initiatives"
+  path="/initiatives"
+  description="What Donna Weinberger is actively building and leading now — across affirming behavioral health, AI-enabled innovation, community, and advocacy."
+>
+  <PageHeader
+    eyebrow="Current initiatives"
+    title="What she's actively building now."
+    intro="A founder's work is never finished. Here's where Donna's attention is focused today — the organizations and initiatives she's actively leading and growing."
+  />
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="initiatives">
+        {
+          INITIATIVES.map((it, i) => (
+            <article class="initiative" data-reveal>
+              <div class="initiative-side">
+                <span class="initiative-num">{String(i + 1).padStart(2, "0")}</span>
+                <span class="tag">{it.category}</span>
+              </div>
+              <div class="initiative-body">
+                <h2>{it.name}</h2>
+                <p>{it.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container narrow center">
+      <p class="eyebrow" data-reveal>Looking ahead</p>
+      <h2 data-reveal>The next thing is usually already taking shape.</h2>
+      <p class="lede closing-lede" data-reveal>
+        New ideas tend to arrive the moment a real need becomes visible. If
+        you're working on something at the intersection of care, community, and
+        technology, Donna would like to hear about it.
+      </p>
+      <a href="/contact" class="btn btn--accent" data-reveal>Reach out</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .initiatives {
+    display: flex;
+    flex-direction: column;
+  }
+  .initiative {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    padding: clamp(1.8rem, 4vw, 2.8rem) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .initiative:first-child {
+    border-top: 1px solid var(--line);
+  }
+  .initiative-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .initiative-num {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--violet);
+  }
+  .initiative-body h2 {
+    margin: 0 0 0.6rem;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+  }
+  .initiative-body p {
+    margin: 0;
+    color: var(--slate);
+    max-width: 46rem;
+    font-size: 1.1rem;
+  }
+  .center {
+    text-align: center;
+  }
+  .center .eyebrow {
+    justify-content: center;
+  }
+  .closing-lede {
+    color: #cfcbc2;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 640px) {
+    .initiative {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .initiative-side {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+</style>

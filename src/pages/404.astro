@@ -1,0 +1,55 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { NAV } from "../consts";
+---
+
+<Layout
+  title="Page not found"
+  path="/404"
+  description="The page you're looking for couldn't be found."
+>
+  <section class="section notfound">
+    <div class="container narrow center">
+      <p class="eyebrow">404</p>
+      <h1>That page wandered off.</h1>
+      <p class="lede">
+        The link may be old or the address slightly off. Here's the way back.
+      </p>
+      <ul class="nf-links">
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+      <a href="/" class="btn btn--accent">Return home</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .notfound {
+    padding-block: clamp(4rem, 12vw, 8rem);
+  }
+  .center {
+    text-align: center;
+  }
+  .center .eyebrow {
+    justify-content: center;
+  }
+  .nf-links {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+  }
+  .nf-links a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .nf-links a:hover {
+    color: var(--ink);
+  }
+</style>

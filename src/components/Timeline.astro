@@ -1,0 +1,108 @@
+---
+import { MILESTONES } from "../data/milestones";
+---
+
+<section class="section timeline-section">
+  <div class="container">
+    <header class="timeline-head" data-reveal>
+      <p class="eyebrow">The arc of the work</p>
+      <h2>A throughline across very different rooms</h2>
+      <p class="lede">
+        From the first affirming treatment program to AI-enabled tooling, the
+        work has moved across fields without losing its center: build what
+        people actually need, then make it durable.
+      </p>
+    </header>
+
+    <ol class="timeline">
+      {
+        MILESTONES.map((m, i) => (
+          <li class="milestone" data-reveal>
+            <span class="milestone-dot" aria-hidden="true" />
+            <span class="milestone-period">{m.period}</span>
+            <div class="milestone-body">
+              <h3>{m.title}</h3>
+              <p>{m.detail}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline-head {
+    max-width: 44rem;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  /* The spectrum spine running through the timeline */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--spectrum-vert);
+    opacity: 0.5;
+  }
+  .milestone {
+    position: relative;
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 1.5rem;
+    padding: 0 0 2.4rem 2.2rem;
+  }
+  .milestone:last-child {
+    padding-bottom: 0;
+  }
+  .milestone-dot {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--violet);
+  }
+  .milestone:nth-child(1) .milestone-dot { border-color: var(--coral); }
+  .milestone:nth-child(2) .milestone-dot { border-color: var(--magenta); }
+  .milestone:nth-child(3) .milestone-dot { border-color: #a23a96; }
+  .milestone:nth-child(4) .milestone-dot { border-color: var(--violet); }
+  .milestone:nth-child(5) .milestone-dot { border-color: #5b46b4; }
+  .milestone:nth-child(6) .milestone-dot { border-color: var(--indigo); }
+
+  .milestone-period {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--slate);
+    padding-top: 6px;
+  }
+  .milestone-body h3 {
+    margin: 0 0 0.4rem;
+  }
+  .milestone-body p {
+    margin: 0;
+    color: var(--slate);
+    max-width: 46rem;
+  }
+  @media (max-width: 640px) {
+    .milestone {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+      padding-left: 2rem;
+    }
+    .milestone-period {
+      padding-top: 0;
+    }
+  }
+</style>

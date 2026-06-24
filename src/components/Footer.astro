@@ -1,0 +1,136 @@
+---
+import { SITE, NAV, DOMAINS } from "../consts";
+const year = new Date().getFullYear();
+const socials = [
+  { label: "LinkedIn", href: SITE.social.linkedin },
+  { label: "Instagram", href: SITE.social.instagram },
+  { label: "X", href: SITE.social.x },
+].filter((s) => s.href);
+---
+
+<footer class="site-footer">
+  <hr class="spectrum-rule" />
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <p class="footer-name">{SITE.name}</p>
+      <p class="footer-tag">{SITE.tagline}</p>
+      {
+        socials.length > 0 && (
+          <ul class="footer-social">
+            {socials.map((s) => (
+              <li>
+                <a href={s.href} rel="me noopener" target="_blank">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <p class="footer-heading">Explore</p>
+      <ul>
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="footer-domains">
+      <p class="footer-heading">Domains</p>
+      <ul>
+        {DOMAINS.map((d) => <li>{d}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-base">
+    <p>© {year} {SITE.name}. All rights reserved.</p>
+    <p class="footer-credit">{SITE.domain}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: #c9c5bd;
+  }
+  .site-footer .spectrum-rule {
+    margin: 0;
+    border-radius: 0;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-block: clamp(2.5rem, 5vw, 4rem) 2rem;
+  }
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: #fdfcfa;
+    margin: 0 0 0.3rem;
+  }
+  .footer-tag {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #948fa6;
+    margin: 0 0 1.25rem;
+  }
+  .footer-heading {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #948fa6;
+    margin: 0 0 1rem;
+  }
+  .footer-nav ul,
+  .footer-domains ul,
+  .footer-social {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .footer-social {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+  .footer-nav a,
+  .footer-social a {
+    color: #c9c5bd;
+    font-size: 0.95rem;
+  }
+  .footer-nav a:hover,
+  .footer-social a:hover {
+    color: #fff;
+  }
+  .footer-domains li {
+    font-size: 0.95rem;
+    color: #c9c5bd;
+  }
+  .footer-base {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-block: 1.5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.85rem;
+    color: #8e8a82;
+  }
+  .footer-base p {
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
