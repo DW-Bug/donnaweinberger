@@ -45,13 +45,6 @@ import { SITE } from "../consts";
 
   <div class="form-footer">
     <button type="submit" class="btn btn--accent">Send message</button>
-    {
-      SITE.contactEmail && (
-        <p class="form-alt">
-          Prefer email? <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
-        </p>
-      )
-    }
   </div>
 
   <p id="cf-status" class="form-status" role="status" aria-live="polite"></p>
@@ -119,11 +112,6 @@ import { SITE } from "../consts";
     gap: 1.25rem;
     flex-wrap: wrap;
   }
-  .form-alt {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--slate);
-  }
   .form-status {
     margin: 0;
     font-size: 0.95rem;
@@ -184,7 +172,7 @@ import { SITE } from "../consts";
         );
       } else {
         setStatus(
-          body.error || "Something went wrong. Please try again or email directly.",
+          body.error || "Something went wrong. Please try again in a moment.",
           "is-error"
         );
       }

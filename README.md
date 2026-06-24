@@ -56,24 +56,35 @@ All content lives in plain data files — no need to touch markup:
 
 ---
 
-## Contact
+## Contact form
 
-The contact page currently uses a simple **"Email Donna"** call-to-action that opens the visitor's mail app addressed to `admin@inspirerecovery.com` (set via `contactEmail` in `src/consts.ts`). No backend is required for this to work.
+The Contact page shows a contact form (name, email, organization, topic, and message). It posts JSON to `/api/contact`, handled by the Cloudflare Pages Function at `functions/api/contact.js`, which delivers the message by email through [Resend](https://resend.com).
 
-A full contact form is also included for later use:
+The form shows a success message **only** when the API confirms the email was sent. If delivery isn't configured or the send fails, it shows a clear error instead. The destination address is kept server-side and is never displayed on the site.
 
-- `src/components/ContactForm.astro` — the form UI (currently not imported anywhere).
-- `functions/api/contact.js` — the Cloudflare Pages Function that would handle submissions.
+### Required Cloudflare environment variables
 
-When you're ready to switch from the mailto CTA to the form, import `ContactForm` into `src/pages/contact.astro` and set these environment variables in **Cloudflare Pages → Settings → Environment variables**:
+Set all three in **Cloudflare dashboard → your Pages project → Settings → Environment variables** (add them to the Production environment, and Preview too if you use preview deployments):
 
-| Variable         | Example                                   |
-| ---------------- | ----------------------------------------- |
-| `RESEND_API_KEY` | your [Resend](https://resend.com) API key |
-| `CONTACT_TO`     | `admin@inspirerecovery.com`               |
-| `CONTACT_FROM`   | `Website <noreply@donnaweinberger.com>`   |
+| Variable         | Required | Example                                      | Notes |
+| ---------------- | -------- | -------------------------------------------- | ----- |
+| `RESEND_API_KEY` | Yes      | `re_xxxxxxxxxxxxxxxxxxxxxxxx`                 | Create at [resend.com](https://resend.com) → API Keys. |
+| `CONTACT_TO`     | Yes      | `admin@inspirerecovery.com`                  | Inbox that receives submissions. Stays server-side. |
+| `CONTACT_FROM`   | Yes      | `Donna Weinberger <noreply@donnaweinberger.com>` | Must be a **verified** sender/domain in Resend. |
 
-The function will **not** report success unless email is actually configured and the send succeeds — if any of those variables are missing it returns an error, so the form can never show a false "message sent" message. To swap in a different provider, edit the `fetch(...)` call in `functions/api/contact.js`.
+If any of these are missing, the function returns HTTP 503 and the form displays an error rather than a false success. After adding or changing variables, redeploy (or trigger a new deployment) for them to take effect.
+
+For local testing of the Function with Wrangler, create a `.dev.vars` file in the project root (it's git-ignored):
+
+```
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxx
+CONTACT_TO=admin@inspirerecovery.com
+CONTACT_FROM=Donna Weinberger <noreply@donnaweinberger.com>
+```
+
+then run `npm run build && npx wrangler pages dev ./dist`.
+
+To swap in a different email provider, edit the `fetch(...)` call in `functions/api/contact.js`.
 
 ---
 

@@ -1,19 +1,18 @@
 /**
  * Cloudflare Pages Function — POST /api/contact
  *
- * Validates the contact form and (optionally) delivers the message by email.
+ * Validates the contact form and delivers the message by email via Resend.
  *
- * Email delivery is OPTIONAL and off by default. To enable it, set these
- * environment variables in your Cloudflare Pages project
- * (Settings → Environment variables):
+ * Email delivery REQUIRES all three of these environment variables, set in
+ * your Cloudflare Pages project (Settings → Environment variables):
  *
  *   RESEND_API_KEY   Your Resend API key  (https://resend.com)
- *   CONTACT_TO       Destination inbox, e.g. "hello@donnaweinberger.com"
- *   CONTACT_FROM     A verified sender, e.g. "Website <noreply@donnaweinberger.com>"
+ *   CONTACT_TO       Destination inbox (kept server-side; never shown publicly)
+ *   CONTACT_FROM     A verified Resend sender, e.g. "Website <noreply@yourdomain.com>"
  *
- * If any of these are missing, the function returns an error (HTTP 503) rather
- * than reporting success — so a re-enabled form can never show a false
- * "message sent" message before delivery is actually configured.
+ * If any are missing, the function returns an error (HTTP 503) rather than
+ * reporting success — so the form can never show a false "message sent"
+ * message before delivery is actually configured.
  */
 
 const json = (data, status = 200) =>
@@ -63,7 +62,7 @@ export async function onRequestPost({ request, env }) {
       {
         ok: false,
         error:
-          "Email isn't set up yet. Please reach out directly at admin@inspirerecovery.com.",
+          "The contact form isn't available right now. Please try again later.",
       },
       503
     );

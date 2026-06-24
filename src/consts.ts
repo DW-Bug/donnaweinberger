@@ -22,7 +22,7 @@ export const SITE = {
   },
   // Contact endpoint handled by the Cloudflare Pages Function.
   contactEndpoint: "/api/contact",
-  contactEmail: "admin@inspirerecovery.com", // public mailto used by the contact CTA
+  contactEmail: "", // intentionally blank — the address is never shown publicly; the form posts to contactEndpoint
 };
 
 export const NAV = [
