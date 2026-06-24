@@ -11,8 +11,9 @@
  *   CONTACT_TO       Destination inbox, e.g. "hello@donnaweinberger.com"
  *   CONTACT_FROM     A verified sender, e.g. "Website <noreply@donnaweinberger.com>"
  *
- * If RESEND_API_KEY is not set, the function still validates input and returns
- * success so the form works in development — wire up the provider before launch.
+ * If any of these are missing, the function returns an error (HTTP 503) rather
+ * than reporting success — so a re-enabled form can never show a false
+ * "message sent" message before delivery is actually configured.
  */
 
 const json = (data, status = 200) =>
@@ -51,19 +52,25 @@ export async function onRequestPost({ request, env }) {
     );
   }
 
-  // No provider configured — accept gracefully (useful in dev / before launch).
-  if (!env || !env.RESEND_API_KEY) {
-    console.log("[contact] received (no email provider configured):", {
-      name,
-      email,
-      organization,
-      reason,
-    });
-    return json({ ok: true });
+  // No provider configured — do NOT pretend the message was sent.
+  // Returning an error here means a re-enabled form can never show a false
+  // success message before real delivery is wired up.
+  if (!env || !env.RESEND_API_KEY || !env.CONTACT_TO || !env.CONTACT_FROM) {
+    console.warn(
+      "[contact] email delivery is not configured (missing RESEND_API_KEY, CONTACT_TO, or CONTACT_FROM)."
+    );
+    return json(
+      {
+        ok: false,
+        error:
+          "Email isn't set up yet. Please reach out directly at admin@inspirerecovery.com.",
+      },
+      503
+    );
   }
 
-  const to = env.CONTACT_TO || "hello@donnaweinberger.com";
-  const from = env.CONTACT_FROM || "Website <noreply@donnaweinberger.com>";
+  const to = env.CONTACT_TO;
+  const from = env.CONTACT_FROM;
 
   const body = [
     `New contact form submission`,

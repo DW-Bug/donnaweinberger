@@ -22,7 +22,7 @@ export const SITE = {
   },
   // Contact endpoint handled by the Cloudflare Pages Function.
   contactEndpoint: "/api/contact",
-  contactEmail: "", // optional public mailto fallback, e.g. "hello@donnaweinberger.com"
+  contactEmail: "admin@inspirerecovery.com", // public mailto used by the contact CTA
 };
 
 export const NAV = [

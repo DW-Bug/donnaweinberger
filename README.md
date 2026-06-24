@@ -56,19 +56,24 @@ All content lives in plain data files — no need to touch markup:
 
 ---
 
-## Contact form
+## Contact
 
-The form posts JSON to `/api/contact`, handled by `functions/api/contact.js`.
+The contact page currently uses a simple **"Email Donna"** call-to-action that opens the visitor's mail app addressed to `admin@inspirerecovery.com` (set via `contactEmail` in `src/consts.ts`). No backend is required for this to work.
 
-By default it validates input (and a honeypot spam trap) and returns success without sending email — so it works immediately in dev. To deliver messages by email, set these environment variables in **Cloudflare Pages → Settings → Environment variables**:
+A full contact form is also included for later use:
+
+- `src/components/ContactForm.astro` — the form UI (currently not imported anywhere).
+- `functions/api/contact.js` — the Cloudflare Pages Function that would handle submissions.
+
+When you're ready to switch from the mailto CTA to the form, import `ContactForm` into `src/pages/contact.astro` and set these environment variables in **Cloudflare Pages → Settings → Environment variables**:
 
 | Variable         | Example                                   |
 | ---------------- | ----------------------------------------- |
 | `RESEND_API_KEY` | your [Resend](https://resend.com) API key |
-| `CONTACT_TO`     | `hello@donnaweinberger.com`               |
+| `CONTACT_TO`     | `admin@inspirerecovery.com`               |
 | `CONTACT_FROM`   | `Website <noreply@donnaweinberger.com>`   |
 
-To swap in a different provider, edit the `fetch(...)` call in `functions/api/contact.js`.
+The function will **not** report success unless email is actually configured and the send succeeds — if any of those variables are missing it returns an error, so the form can never show a false "message sent" message. To swap in a different provider, edit the `fetch(...)` call in `functions/api/contact.js`.
 
 ---
 
